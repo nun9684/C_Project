@@ -7,7 +7,6 @@ from System.Windows.Forms import Application, Button, Form, Label, TextBox, Pane
 
 class DatabaseRow(FlowLayoutPanel):
     def __init__(self, formParent, myIndex, strName, strID):
-        print("Create DatabaseList")
         self.initLabel()
         self.checkBox = CheckBox()
         self.lblName = Label()
