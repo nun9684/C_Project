@@ -7,6 +7,7 @@ from System.Windows.Forms import Application, Button, Form, Label, TextBox, Pane
 
 from GUI.Page1 import TBL_Generator
 from GUI.MainPage2 import Page2
+import os
 
 class Page1(Form):
     def __init__(self):
@@ -59,6 +60,7 @@ class Page1(Form):
 
     def btnNextPage_Clicked(self, sender, evtArgs):
         if(self.recursivevTextBoxCheck()):
+            self.writeListToFile()
             p2 = Page2()
             p2.Show()            
 
@@ -156,3 +158,20 @@ class Page1(Form):
         self.headerListPanel.Controls.Add(self.lblName)
         self.headerListPanel.Controls.Add(self.lblID)
         self.headerListPanel.Controls.Add(self.lblNumber)
+
+    def writeListToFile(self):
+        path = os.getcwd() + r'\GUI\Camera\Value.txt'
+        f = None
+        if os.path.exists(path):
+            os.remove(path)
+            
+        for panel in self.ListPanel.Controls:
+            try :
+                f = open(path, "a")
+                for control in panel.Controls :
+                    f.write(control.Text + ',')
+                f.write('wait\n')
+            finally:
+                if f is not None:
+                    f.close()
+                
